@@ -1,47 +1,21 @@
-# tmp
-
-Add a short description here!
-
+# RL Benchmark
 ## Description
 
-A longer description of your project goes here...
 
 ## Installation
 
 In order to set up the necessary environment:
 
-1. create an environment `tmp` with the help of [conda],
+1. Create an environment `rl-benchmark` with the help of [conda],
    ```
    conda env create -f environment.yml
    ```
-2. activate the new environment with
+2. Activate the new environment with
    ```
-   conda activate tmp
-   ```
-3. install `tmp` with:
-   ```
-   python setup.py install # or `develop`
+   conda activate rl-benchmark
    ```
 
-Optional and needed only once after `git clone`:
 
-4. install several [pre-commit] git hooks with:
-   ```
-   pre-commit install
-   # You might also want to run `pre-commit autoupdate`
-   ```
-   and checkout the configuration under `.pre-commit-config.yaml`.
-   The `-n, --no-verify` flag of `git commit` can be used to deactivate pre-commit hooks temporarily.
-
-5. install [nbstripout] git hooks to remove the output cells of committed notebooks with:
-   ```
-   nbstripout --install --attributes notebooks/.gitattributes
-   ```
-   This is useful to avoid large diffs due to plots in your notebooks.
-   A simple `nbstripout --uninstall` will revert these changes.
-
-
-Then take a look into the `scripts` and `notebooks` folders.
 
 ## Dependency Management & Reproducibility
 
