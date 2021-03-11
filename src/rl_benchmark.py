@@ -11,12 +11,12 @@ from src.consts.consts import Stock, Riskless, Simulation
 
 def stock_update(s_cur, u, sigma, dt):
     return s_cur + \
-           (u - 1) * s_cur * dt + \
-           (sigma - 1) * s_cur * np.sqrt(dt) * np.random.normal(0, 1, 1)
+           u * s_cur * dt + \
+           sigma * s_cur * np.sqrt(dt) * np.random.normal(0, 1, 1)
 
 
 def riskless_update(b_cur, r, dt):
-    return b_cur + (r - 1) * b_cur * dt
+    return b_cur + r * b_cur * dt
 
 
 def portfolio_update(x_cur, u, a_t, r, sigma, dt):
@@ -28,7 +28,7 @@ def dependent_portfolio_update(b_next, s_next, alpha):
 
 
 def alpha_analytical(u, r, sigma, p):
-    return (u - r)/(np.square(sigma) * (1 - p))
+    return (u - r)/(np.square(sigma + 1) * (1 - p))
 
 
 def simulate_stock_history():
@@ -40,7 +40,7 @@ def simulate_stock_history():
     b[0] = Riskless.b_0
 
     for i in range(1, Simulation.increments):
-        s[i] = stock_update(s[i-1], Stock.u, Stock.sigma, Simulation.dt)
+        s[i] = stock_update(s[i-1], Stock.u, Stock.sigma_annual, Simulation.dt)
         b[i] = riskless_update(b[i-1], Riskless.r, Simulation.dt)
         t[i] = t[i-1] + Simulation.dt
 
@@ -66,18 +66,23 @@ def plot_simulation(s, b, x, t):
     plt.plot(t, x, label="Portfolio Value", color="green")
 
 
-
     plt.ylabel("USD")
     plt.xlabel("Time (Days)")
+
+    plt.ylim(bottom=0)
+    plt.xlim(left=0, right=Simulation.num_days-1)
+
     plt.legend()
     plt.grid(True)
     plt.show()
     return
 
+
 if __name__ == "__main__":
     # computing optimal alpha for p = 0.5
     p = 0.5
-    alpha = alpha_analytical(Stock.u_annual, Riskless.r_annual, Stock.sigma, p)
+    alpha = alpha_analytical(Stock.u_annual, Riskless.r_annual, Stock.sigma_annual, p)
+    print(alpha)
 
     s, b, t = simulate_stock_history()
     x = simulate_constant_alpha(s, b, alpha)

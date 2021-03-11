@@ -3,6 +3,8 @@ channels:
   - defaults
 dependencies:
   - python=3.6
+  - pandas
   - numpy
   - matplotlib
   - seaborn
+  - jupyter

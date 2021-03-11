@@ -19,6 +19,12 @@ To configure a Python conda environment to run this project, follow these steps 
 2. Define reward as the value at horizon
 3. See if optimal RL policy converges with optimal closed-form Merton problem solution
 
+### Tasks: 21-01-21
+1. Investigate how FinRL package ingests data
+2. Based on how FinRL ingests data, create multiple sampling method to feed data into FinRL
+3. Construct RL agent and visualize results
+
+
 [conda]: https://docs.conda.io/
 [pre-commit]: https://pre-commit.com/
 [Jupyter]: https://jupyter.org/
